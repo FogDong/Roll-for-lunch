@@ -18,4 +18,4 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+![](http://ok2ra0say.bkt.clouddn.com/344A074E-26D7-4F46-86C6-A98EA0E98AC3.png)
