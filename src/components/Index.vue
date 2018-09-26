@@ -50,7 +50,7 @@
         }
       },
       getResult() {
-        this.$http.get(`http:/localhost:8989/api/v1alpha1/result`)
+        this.$http.get(`http://localhost:8989/api/v1alpha1/result`)
         .then(function(result){
           this.result = []
           result.body.map(n => (
