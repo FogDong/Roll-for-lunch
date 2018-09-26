@@ -10,7 +10,7 @@
             <el-button type="info" plain size="mini" @click.native="fail">不了不了</el-button>
           </div>
         </div>
-        <div v-for="o in result" :key="o" class="text item">
+        <div v-for="o in result" :key="o.name" class="text item">
           <div class="username">{{o.name}}</div>
           <div class="number">{{o.number}}</div>
         </div>
@@ -23,13 +23,15 @@
     data() {
       return {
         input: '',
-        result: []
+        result: [],
+        refresh: ''
       }
     },
     methods: {
       roll() {
-        this
-          .$http.get(`http://144.202.89.43:8989/api/v1alpha1/number?username=${this.input}`)
+        if (this.input) {
+          this
+          .$http.get(`http://localhost/api/v1alpha1/number?username=${this.input}`)
           .then(function(result){
             this.result.push({
               'name': result.body.username,
@@ -40,12 +42,36 @@
           .catch(e=> {
             console.log(e)
           })
+        } else {
+          this.$message({
+            message: '请输入名字',
+            type: 'warning'
+          });
+        }
+      },
+      getResult() {
+        this.$http.get(`http:/localhost/api/v1alpha1/result`)
+        .then(function(result){
+          this.result = []
+          result.body.map(n => (
+            this.result.push({
+              'name': n.username,
+              'number': n.number
+            })
+          ))
+        })
       },
       fail() {
         this.$router.push({path: '/guna'});
       }
     },
     mounted() {
+      console.log(process.env.BACKEND)
+      this.getResult()
+      this.refresh = self.setInterval(this.getResult, 5000)
+    },
+    destroyed() {
+      window.clearInterval(this.refresh)
     }
   }
 </script>
