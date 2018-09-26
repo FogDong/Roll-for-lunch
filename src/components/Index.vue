@@ -31,7 +31,7 @@
       roll() {
         if (this.input) {
           this
-          .$http.get(`http://localhost/api/v1alpha1/number?username=${this.input}`)
+          .$http.get(`http://localhost:8989/api/v1alpha1/number?username=${this.input}`)
           .then(function(result){
             this.result.push({
               'name': result.body.username,
@@ -50,7 +50,7 @@
         }
       },
       getResult() {
-        this.$http.get(`http:/localhost/api/v1alpha1/result`)
+        this.$http.get(`http:/localhost:8989/api/v1alpha1/result`)
         .then(function(result){
           this.result = []
           result.body.map(n => (
